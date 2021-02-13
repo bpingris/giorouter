@@ -56,7 +56,7 @@ func main() {
 				switch e := e.(type) {
 				case system.FrameEvent:
 					gtx := layout.NewContext(&ops, e)
-					router.Layout(gtx, e) // Draw the current page
+					router.Layout(gtx) // Draw the current page
 					e.Frame(gtx.Ops)
 				case system.DestroyEvent:
 					os.Exit(0)

@@ -62,3 +62,7 @@ func (r *Router) Redraw() {
 func (r *Router) CanPop() bool {
 	return len(r.Stack) > 1
 }
+
+func (r *Router) Layout(gtx layout.Context) {
+	r.Routes[r.Top()].Layout(gtx, r.th)
+}
