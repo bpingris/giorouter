@@ -16,8 +16,7 @@ func newRouter() *Router {
 	}, initialRoute)
 
 	go func() {
-		for {
-			<-r.C
+		for range r.C {
 		}
 	}()
 	return r
