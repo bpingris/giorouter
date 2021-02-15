@@ -35,38 +35,37 @@ func (a *About) Layout(gtx layout.Context, th *material.Theme) {
 }
 
 func main() {
-  	th := material.NewTheme(gofont.Collection())
-	router := giorouter.NewRouter(th)
-
+    th := material.NewTheme(gofont.Collection())
+    router := giorouter.NewRouter(th)
     home := Home{Router: router}
     about := About{Router: router}
 
     router.SetRoutes(giorouter.Routes{
         "home": &home,
         "about": &about,
-    }, "home")
+   }, "home")
 
     go func() {
-		w := app.NewWindow()
-		var ops op.Ops
+        w := app.NewWindow()
+        var ops op.Ops
 
-		for {
-			select {
-			case e := <-w.Events():
-				switch e := e.(type) {
-				case system.FrameEvent:
-					gtx := layout.NewContext(&ops, e)
-					router.Layout(gtx) // Draw the current page
-					e.Frame(gtx.Ops)
-				case system.DestroyEvent:
-					os.Exit(0)
-				}
-			case <-router.C:
+        for {
+            select {
+            case e := <-w.Events():
+                switch e := e.(type) {
+                case system.FrameEvent:
+                    gtx := layout.NewContext(&ops, e)
+                    router.Layout(gtx) // Draw the current page
+                    e.Frame(gtx.Ops)
+                case system.DestroyEvent:
+                    os.Exit(0)
+                }
+            case <-router.C:
                 // Redraw the screen when the route is changing
-				w.Invalidate()
-			}
-		}
-    }()
+                w.Invalidate()
+           }
+       }
+       }()
     app.Main()
 }
 ```
