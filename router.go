@@ -36,7 +36,7 @@ func (r *Router) SetRoutes(routes Routes, initialRoute string) {
 	r.Push(initialRoute)
 }
 
-// Push add a route to the stack and ask for a redraw
+// Push adds a route to the stack and ask for a redraw
 func (r *Router) Push(route string) {
 	if _, ok := r.Routes[route]; ok {
 		r.Stack = append(r.Stack, route)
@@ -65,7 +65,7 @@ func (r *Router) Pop() string {
 	return top
 }
 
-// Redraw send an event through the Router'c Channel to ask for an immediate redraw
+// Redraw sends an event through the Router'c Channel to ask for an immediate redraw
 func (r *Router) Redraw() {
 	r.C <- 0
 }
@@ -75,7 +75,7 @@ func (r *Router) CanPop() bool {
 	return len(r.Stack) > 1
 }
 
-// Layout draw the current route
+// Layout draws the current route
 func (r *Router) Layout(gtx layout.Context) layout.Dimensions {
 	return r.Routes[r.Top()].Layout(gtx)
 }
